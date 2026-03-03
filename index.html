@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sirhhhhhhhh's Birthday Surprise</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(45deg, #ff758c, #ff7eb3);
+    overflow: hidden;
+    color: white;
+}
+
+h1 {
+    font-size: 45px;
+    margin-top: 15%;
+}
+
+#countdown {
+    font-size: 35px;
+}
+
+#surprise {
+    display: none;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 20px white;
+}
+
+.message {
+    font-size: 22px;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">🎁 Sirhhhhhhhh's Birthday Surprise Unlocks In...</h1>
+<div id="countdown"></div>
+
+<div id="surprise">
+    <h1>🎉 HAPPY BIRTHDAY SIRHHHHHHHH 🎉</h1>
+    <img id="slideshow" src="photo1.jpg">
+
+    <div class="message">
+        You are not just my best friend...  
+        You are my chaos partner, my therapist,  
+        my favourite notification,  
+        and the person I can never replace. ❤️  
+
+        Life would be boring without you.  
+        Thank you for existing.  
+        I’m lucky I get to do life with you. 💙  
+
+        Forever my best friend.  
+    </div>
+</div>
+
+<!-- Add your downloaded mp3 file -->
+<audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+var birthday = new Date("2026-03-04T00:00:00").getTime();
+
+var timer = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = birthday - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+    if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("title").style.display = "none";
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("surprise").style.display = "block";
+        document.body.style.background = "#ff4b5c";
+        document.getElementById("music").play();
+        startConfetti();
+    }
+}, 1000);
+
+// Slideshow
+var images = ["photo1.jpg", "photo2.jpg", "photo3.jpg"];
+var i = 0;
+
+function slideShow() {
+    document.getElementById("slideshow").src = images[i];
+    i = (i + 1) % images.length;
+}
+setInterval(slideShow, 2000);
+
+// Confetti
+function startConfetti() {
+    for (let i = 0; i < 120; i++) {
+        let confetti = document.createElement("div");
+        confetti.style.position = "absolute";
+        confetti.style.width = "10px";
+        confetti.style.height = "10px";
+        confetti.style.backgroundColor = 
+            "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.top = "-10px";
+        confetti.style.animation = "fall 3s linear infinite";
+        document.body.appendChild(confetti);
+    }
+}
+
+var style = document.createElement('style');
+style.innerHTML = `
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
