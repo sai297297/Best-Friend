@@ -6,7 +6,7 @@
     <title>3D Photo Slider & Romantic Surprise</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Calligraffitti&display=swap');
 
         :root {
             --primary: #ff4d6d;
@@ -20,11 +20,10 @@
         body {
             background: radial-gradient(circle at center, #590d22 0%, #2b0d0d 100%);
             color: white;
-            font-family: 'Georgia', serif;
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             margin: 0;
             min-height: 100vh;
-            touch-action: pan-y;
         }
 
         /* Landing Page Styles */
@@ -72,20 +71,15 @@
             height: 400px;
             perspective: 1500px;
             position: relative;
-            margin: 80px auto;
-            cursor: grab;
+            margin: 40px auto;
         }
         
-        .scene:active {
-            cursor: grabbing;
-        }
-
         .carousel {
             width: 100%;
             height: 100%;
             position: absolute;
             transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .carousel-item {
@@ -94,13 +88,13 @@
             height: 380px;
             left: 10px;
             top: 10px;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 15px 45px rgba(0,0,0,0.7);
             backface-visibility: hidden;
-            border: 6px solid #fff;
+            border: 8px solid #fff;
             user-select: none;
-            pointer-events: none;
+            background: #333;
         }
 
         .carousel-item img {
@@ -110,29 +104,50 @@
         }
 
         .next-card-overlay {
-            background: linear-gradient(to bottom, rgba(89, 13, 34, 0.9), rgba(43, 13, 13, 0.95));
+            background: linear-gradient(to bottom, #590d22, #2b0d0d);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100%;
             text-align: center;
-            padding: 20px;
-            pointer-events: auto; 
+            padding: 24px;
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+            border-color: transparent;
         }
 
         /* Watercolor Envelope Style */
         .envelope-wrapper {
             position: relative;
-            width: 360px;
-            height: 250px;
+            width: min(90vw, 400px);
+            height: 280px;
             background: #fdf5e6;
-            margin: 80px auto;
+            margin: 40px auto;
             cursor: pointer;
             transition: transform 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            border-radius: 2px;
-            background-image: radial-gradient(circle at 50% 50%, rgba(210, 180, 140, 0.2), transparent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-radius: 4px;
         }
 
         .envelope-top {
@@ -141,18 +156,17 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 180px solid transparent;
-            border-right: 180px solid transparent;
-            border-top: 140px solid #e5d3b3; 
+            border-left: min(45vw, 200px) solid transparent;
+            border-right: min(45vw, 200px) solid transparent;
+            border-top: 150px solid #e5d3b3; 
             transform-origin: top;
             transition: transform 0.6s ease-in-out;
             z-index: 10;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
         }
 
         .wax-seal {
             position: absolute;
-            top: 120px;
+            top: 130px;
             left: 50%;
             transform: translateX(-50%);
             width: 70px;
@@ -165,40 +179,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.6s ease-in-out;
-            border: 2px solid #a93226;
-        }
-        
-        .wax-seal::before {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 2px;
-            background: #8e1e1e;
-            transform: rotate(-20deg);
-            z-index: -1;
-            opacity: 0.6;
-        }
-
-        .wax-seal::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-        }
-
-        .heart-stamp {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            font-size: 32px;
-            color: #d63031;
-            opacity: 0.8;
-            filter: blur(0.5px);
-            transform: rotate(10deg);
-            z-index: 9;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            color: rgba(255,255,255,0.8);
+            font-size: 30px;
         }
 
         .envelope-front {
@@ -207,9 +189,9 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 180px solid #fdf5e6;
-            border-right: 180px solid #fdf5e6;
-            border-bottom: 130px solid #f3e5c9;
+            border-left: min(45vw, 200px) solid #fdf5e6;
+            border-right: min(45vw, 200px) solid #fdf5e6;
+            border-bottom: 140px solid #f3e5c9;
             z-index: 5;
         }
 
@@ -219,21 +201,21 @@
             left: 5%;
             width: 90%;
             height: 80%;
-            background: #e4d5b7;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            transition: transform 0.7s ease-in-out, height 0.7s;
+            background: #fdf5e6;
+            padding: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            transition: transform 0.7s ease-in-out, height 0.7s, opacity 0.5s;
             z-index: 2;
             color: #3d2b1f;
             overflow-y: auto;
             border: 1px solid #c2b280;
-            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            opacity: 0;
         }
 
         .letter-content {
-            font-family: 'Brush Script MT', cursive, serif;
-            font-size: 1.2rem;
-            line-height: 1.6;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            line-height: 1.4;
         }
 
         .envelope-wrapper.open .envelope-top {
@@ -242,136 +224,167 @@
         }
 
         .envelope-wrapper.open .wax-seal {
-            transform: translateX(-50%) translateY(-150px) rotate(15deg);
+            transform: translateX(-50%) translateY(-100px) scale(0);
             opacity: 0;
-            z-index: 1;
         }
 
         .envelope-wrapper.open .letter {
-            transform: translateY(-220px);
+            transform: translateY(-260px);
             z-index: 15;
-            height: 450px;
-            clip-path: polygon(
-                2% 0%, 98% 1%, 100% 4%, 99% 96%, 97% 100%, 3% 99%, 0% 97%, 1% 3%
-            );
-            border: none;
+            height: 480px;
+            opacity: 1;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .mini-photo {
-            width: 100px;
-            height: 100px;
-            border: 5px solid #fff;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-            float: right;
-            margin: 0 0 15px 15px;
-            transform: rotate(-3deg);
         }
 
         .frame {
             border: 8px solid #fff;
-            padding: 5px;
+            padding: 0;
             background: #fff;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.4);
             transition: all 0.4s;
+            overflow: hidden;
         }
-        .frame:hover {
-            transform: scale(1.08) rotate(-2deg);
-            z-index: 50;
+
+        /* Password Modal Styles */
+        #password-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        #password-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #2b0d0d;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            text-align: center;
+            max-width: 90%;
+            width: 350px;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #password-modal.show .modal-content {
+            transform: scale(1);
         }
 
         .hidden { display: none; }
-        .romantic-text { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .romantic-text { text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         
         .birthday-heading {
             font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
+            font-size: clamp(3rem, 10vw, 5.5rem);
             background: linear-gradient(to bottom, #ffc8dd, #ff4d6d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
+
+        input:focus { outline: none; border-color: white; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .animate-shake { animation: shake 0.2s ease-in-out 0s 2; }
     </style>
 </head>
-<body class="flex flex-col items-center min-h-screen p-4">
+<body class="flex flex-col items-center">
 
     <!-- LANDING PAGE -->
     <div id="landing-page">
-        <h2 class="text-pink-200 text-2xl mb-8 font-light italic opacity-80" id="landing-prompt">Something special is waiting...</h2>
-        <button id="start-btn" onclick="revealApp()" class="px-12 py-4 rounded-full border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-all text-xl font-bold tracking-widest uppercase">
-            Start
-        </button>
+        <div class="text-center p-6">
+            <h2 class="text-pink-200 text-2xl mb-8 font-light italic opacity-80" id="landing-prompt">A world of memories awaits...</h2>
+            <button id="start-btn" onclick="revealApp()" class="px-12 py-4 rounded-full border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-all text-xl font-bold tracking-widest uppercase">
+                Open Your Heart
+            </button>
+        </div>
+    </div>
+
+    <!-- PASSWORD MODAL -->
+    <div id="password-modal">
+        <div class="modal-content">
+            <h3 class="text-pink-300 text-2xl font-[Great Vibes] mb-4">Secret Code Required</h3>
+            <p class="text-pink-100 text-xs mb-6 opacity-70">Enter the magic word to read your letter</p>
+            <input type="password" id="pass-input" placeholder="Type here..." class="w-full bg-black/40 border-b-2 border-pink-500 py-2 px-4 text-center text-white text-lg mb-6">
+            <p id="pass-error" class="text-red-400 text-xs mb-4 opacity-0 transition-opacity">Try again Cutiee..........</p>
+            <div class="flex gap-4">
+                <button onclick="closeModal()" class="flex-1 py-2 text-pink-200/50 text-xs uppercase tracking-widest">Cancel</button>
+                <button onclick="checkPassword()" class="flex-1 bg-pink-600 hover:bg-pink-500 text-white py-2 rounded-full font-bold transition-colors">UNSEAL</button>
+            </div>
+            <p class="mt-6 text-[10px] text-pink-300/40 uppercase tracking-tighter cursor-pointer" onclick="showHint()">Need a hint?</p>
+        </div>
     </div>
 
     <div class="heart-bg" id="heartContainer"></div>
 
     <!-- PAGE 1: 3D SLIDER -->
-    <div id="page1" class="w-full max-w-4xl text-center">
-        <h1 class="text-5xl font-bold mt-12 mb-4 romantic-text text-pink-300">Our Story ✨</h1>
-        <p class="text-pink-100 opacity-80 mb-8 italic">Swipe or drag to explore our memories...</p>
+    <div id="page1" class="w-full max-w-4xl text-center px-4">
+        <!-- Main Heading Updated with Calligraffitti Font -->
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal mt-12 mb-6 romantic-text text-pink-200 font-['Calligraffitti'] px-4 leading-relaxed tracking-wide">
+            "Every picture here holds a memory… and every memory has you."
+        </h1>
+        <p class="text-pink-100 opacity-80 mb-8 italic">Relive our most beautiful moments...</p>
         
         <div class="scene" id="scene">
-            <div id="carousel" class="carousel">
-                <script>
-                    const items = 10;
-                    for(let i=1; i<items; i++) {
-                        document.write(`
-                            <div class="carousel-item" style="transform: rotateY(${(i-1)*36}deg) translateZ(500px);">
-                                <img src="https://picsum.photos/seed/love${i+20}/300/400" alt="Memory ${i}">
-                            </div>
-                        `);
-                    }
-                </script>
-                <div class="carousel-item" style="transform: rotateY(324deg) translateZ(500px);">
-                    <div class="next-card-overlay">
-                        <span class="text-4xl mb-4">💌</span>
-                        <h2 class="text-2xl font-bold mb-4 text-white">To My Valentine...</h2>
-                        <p class="mb-6 text-sm text-pink-200">A hand-written surprise awaits.</p>
-                        <button onclick="goToPage2()" class="bg-white text-pink-700 hover:bg-pink-100 px-8 py-3 rounded-full font-bold shadow-xl transition-all transform hover:scale-105 active:scale-95">
-                            OPEN THE LETTER
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div id="carousel" class="carousel"></div>
         </div>
 
-        <div class="mt-24 text-pink-200/50 text-sm animate-pulse">
-            Swipe left or right ↔
+        <div class="flex items-center justify-center gap-12 mt-12 mb-20">
+            <button onclick="navigate(-1)" class="nav-btn" aria-label="Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="text-pink-200/40 uppercase tracking-widest text-xs font-bold">Use arrows to browse</div>
+            <button onclick="navigate(1)" class="nav-btn" aria-label="Next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
         </div>
     </div>
 
     <!-- PAGE 2: GALLERY & ENVELOPE -->
-    <div id="page2" class="hidden w-full max-w-5xl text-center">
-        <h1 class="birthday-heading mt-12 mb-16">Happy Birthday</h1>
+    <div id="page2" class="hidden w-full max-w-5xl text-center px-4 pb-20">
+        <h1 class="birthday-heading mt-12 mb-10">Happy Birthday</h1>
         
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20 px-4">
-            <div class="frame"><img src="https://picsum.photos/seed/mem1/400/400" class="w-full h-56 object-cover"></div>
-            <div class="frame"><img src="https://picsum.photos/seed/mem2/400/400" class="w-full h-56 object-cover"></div>
-            <div class="frame"><img src="https://picsum.photos/seed/mem3/400/400" class="w-full h-56 object-cover"></div>
-            <div class="frame"><img src="https://picsum.photos/seed/mem4/400/400" class="w-full h-56 object-cover"></div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div class="frame"><img src="/images/img1.jpg" class="w-full h-56 object-cover"></div>
+            <div class="frame"><img src="/images/img2.jpg" class="w-full h-56 object-cover"></div>
+            <div class="frame"><img src="/images/img3.jpg" class="w-full h-56 object-cover"></div>
+            <div class="frame"><img src="/images/img4.jpg" class="w-full h-56 object-cover"></div>
         </div>
 
-        <div class="mt-24 relative pb-40">
-            <p class="text-2xl mb-12 italic text-pink-200">Break the seal to read...</p>
+        <div class="mt-10 relative">
+            <p class="text-xl mb-8 italic text-pink-200">Break the seal to read your letter...</p>
             
-            <div class="envelope-wrapper" id="envelope" onclick="toggleEnvelope()">
-                <div class="heart-stamp">❤</div>
+            <div class="envelope-wrapper" id="envelope" onclick="handleEnvelopeClick()">
                 <div class="envelope-top"></div>
-                <div class="wax-seal"></div>
+                <div class="wax-seal">❤</div>
                 <div class="letter">
-                    <img src="https://picsum.photos/seed/us/200/200" class="mini-photo" alt="Us">
+                    <img src="images/let.JPG" class="w-[110px] h-[110px] border-[6px] border-white shadow-lg float-right ml-4 mb-4 -rotate-3 object-cover" alt="Us">
                     <div class="letter-content text-left">
-                        <h3 class="font-bold text-2xl mb-4 italic">My Dearest Love,</h3>
+                        <h3 class="font-bold text-3xl mb-4">My Dearest Bestieeeee...</h3>
                         <p>
-                            They say that once in a lifetime, you meet someone who changes everything. For me, that someone is you. 
+                            Having you in my life is one of the greatest blessings. In every tough situation, you are always there for me, caring and supporting me. Sometimes I feel like I didn’t just find a friend… I actually won a friendship when I found you.
+                            Every photo in this slider is a snapshot of a moment where I felt like the luckiest person alive. On your birthday, I want to thank you for simply being you. 
                             <br><br>
-                            On your birthday, I want to thank you for every smile, every hug, and every beautiful memory we've shared. You are the parchment on which my favorite stories are written.
+                            I truly believe God decided our bond, and that’s why we are still together today. Thank you for being someone I can always trust and share everything with.
                             <br><br>
-                            I hope your day is as magical as the love you've given me. 
-                            <br><br>
-                            Always yours,
+                            With all my love,
                             <br>
-                            <span class="text-red-800 font-bold text-3xl">Forever ❤️</span>
+                            <span class="text-red-700 font-bold text-3xl">Always Yours ❤️</span>
                         </p>
                     </div>
                 </div>
@@ -379,84 +392,109 @@
             </div>
         </div>
 
-        <button onclick="goToPage1()" class="mt-20 mb-10 text-pink-300/40 hover:text-pink-200 uppercase tracking-widest text-xs">Back to Gallery</button>
+        <button onclick="goToPage1()" class="mt-48 mb-10 px-6 py-2 border border-pink-500/30 rounded text-pink-300/60 hover:text-pink-200 uppercase tracking-widest text-xs transition-colors">
+            Return to Gallery
+        </button>
     </div>
 
     <script>
-        // Reveal App without Countdown
-        function revealApp() {
-            const landing = document.getElementById('landing-page');
-            landing.style.opacity = '0';
-            setTimeout(() => landing.style.visibility = 'hidden', 1000);
-        }
-
-        // Floating hearts
-        const container = document.getElementById('heartContainer');
-        const heartSymbols = ['❤', '💖', '💕', '❣', '💗'];
-        for (let i = 0; i < 35; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDelay = Math.random() * 15 + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            heart.style.opacity = Math.random() * 0.5 + 0.2;
-            container.appendChild(heart);
-        }
-
-        // Manual Interaction State
-        let currentRotation = 0;
-        let startX = 0;
-        let isDragging = false;
+        const SECRET_PASSWORD = "060503"; 
+        const HINT_TEXT = "FMY month"; 
         const carousel = document.getElementById('carousel');
-        const scene = document.getElementById('scene');
+        const modal = document.getElementById('password-modal');
+        const passInput = document.getElementById('pass-input');
+        const passError = document.getElementById('pass-error');
+        const envelope = document.getElementById('envelope');
+        const itemCount = 11; 
+        const radius = 500;
+        const stepAngle = 360 / itemCount;
+        let isUnlocked = false;
 
-        // Rotation Logic
-        function updateRotation(deg) {
-            currentRotation += deg;
+        // Setup Carousel
+        for (let i = 0; i < itemCount; i++) {
+            const item = document.createElement('div');
+            item.className = 'carousel-item';
+            const angle = (i * stepAngle);
+            item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+            
+            if (i < itemCount - 1) {
+                const img = document.createElement('img');
+                img.src = "images/pic" + (i+1) + ".jpg";
+                img.alt = `Memory ${i+1}`;
+                item.appendChild(img);
+            } else {
+                item.innerHTML = `
+                    <div class="next-card-overlay">
+                        <span class="text-5xl mb-6">💌</span>
+                        <h2 class="text-2xl font-bold mb-4 text-white font-[Dancing Script]">To My Favorite Person...</h2>
+                        <p class="mb-8 text-sm text-pink-200">I have something more to say to you.</p>
+                        <button onclick="goToPage2()" class="bg-white text-pink-700 hover:bg-pink-100 px-10 py-4 rounded-full font-bold shadow-xl transition-all transform hover:scale-105">
+                            READ THE LETTER
+                        </button>
+                    </div>
+                `;
+            }
+            carousel.appendChild(item);
+        }
+
+        // Navigation
+        let currentRotation = 0;
+        function navigate(direction) {
+            currentRotation -= direction * stepAngle;
             carousel.style.transform = `rotateY(${currentRotation}deg)`;
         }
 
-        // Touch and Mouse Events
-        const handleStart = (e) => {
-            isDragging = true;
-            startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-            carousel.style.transition = 'none'; 
-        };
+        function revealApp() {
+            document.getElementById('landing-page').style.opacity = '0';
+            setTimeout(() => document.getElementById('landing-page').style.visibility = 'hidden', 1000);
+        }
 
-        const handleMove = (e) => {
-            if (!isDragging) return;
-            const currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-            const diff = (currentX - startX) * 0.5; 
-            carousel.style.transform = `rotateY(${currentRotation + diff}deg)`;
-        };
-
-        const handleEnd = (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            
-            const endX = (e.type.includes('touch')) ? e.changedTouches[0].clientX : e.clientX;
-            const diff = endX - startX;
-            
-            carousel.style.transition = 'transform 0.5s cubic-bezier(0.2, 0, 0.2, 1)';
-            
-            if (Math.abs(diff) > 50) {
-                const direction = diff > 0 ? 1 : -1;
-                updateRotation(direction * 36);
+        // Password Logic
+        function handleEnvelopeClick() {
+            if (isUnlocked) {
+                envelope.classList.toggle('open');
             } else {
-                updateRotation(0); 
+                modal.classList.add('show');
+                passInput.focus();
             }
-        };
+        }
 
-        scene.addEventListener('mousedown', handleStart);
-        window.addEventListener('mousemove', handleMove);
-        window.addEventListener('mouseup', handleEnd);
+        function closeModal() {
+            modal.classList.remove('show');
+            passInput.value = "";
+            passError.style.opacity = "0";
+        }
 
-        scene.addEventListener('touchstart', handleStart);
-        scene.addEventListener('touchmove', handleMove);
-        scene.addEventListener('touchend', handleEnd);
+        function showHint() {
+            const errorMsg = document.getElementById('pass-error');
+            errorMsg.innerText = `Hint: ${HINT_TEXT}`;
+            errorMsg.style.opacity = "1";
+            setTimeout(() => {
+                errorMsg.style.opacity = "0";
+                setTimeout(() => { errorMsg.innerText = "Try again Cutiee.........."; }, 300);
+            }, 3000);
+        }
 
-        // Navigation
+        function checkPassword() {
+            if (passInput.value === SECRET_PASSWORD) {
+                isUnlocked = true;
+                closeModal();
+                setTimeout(() => {
+                    envelope.classList.add('open');
+                }, 400);
+            } else {
+                passError.innerText = "Try again Cutiee..........";
+                passError.style.opacity = "1";
+                passInput.value = "";
+                passInput.classList.add('animate-shake');
+                setTimeout(() => passInput.classList.remove('animate-shake'), 500);
+            }
+        }
+
+        passInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
         function goToPage2() {
             document.getElementById('page1').classList.add('hidden');
             document.getElementById('page2').classList.remove('hidden');
@@ -469,8 +507,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function toggleEnvelope() {
-            document.getElementById('envelope').classList.toggle('open');
+        // Hearts
+        const container = document.getElementById('heartContainer');
+        const heartSymbols = ['❤', '💖', '💕', '💗', '🌸'];
+        for (let i = 0; i < 40; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 15 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            container.appendChild(heart);
         }
     </script>
 </body>
